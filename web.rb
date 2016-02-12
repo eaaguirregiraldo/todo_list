@@ -19,23 +19,21 @@ post '/new/?' do
 end
 
 post '/done/?' do
-  item = Item.first(:id => params[:id])
-  item.done = !item.done
-  item.save
+  Tarea.update(params[:id]) 
+  @tareaupd = Tarea.find(params[:id])
   content_type 'application/json'
-  value = item.done ? 'done' : 'not done'
-  { :id => params[:id], :status => value }.to_json
+  value = @tareaupd["done"] ?  'Done' : 'Not Done'
+  { :id => params[:id], :status => value }.to_json 
 end
 
 get '/delete/:id/?' do
-  Tarea.destroy(params[:id])
+  @tareadel = Tarea.find(params[:id])
   erb :delete
 end
 
 post '/delete/:id/?' do
-  if params.has_key?("ok")
-    item = Item.first(:id => params[:id])
-    item.destroy
+  if params.has_key?("ok")    
+    Tarea.destroy(params[:id])
     redirect '/'
   else
     redirect '/'

@@ -1,6 +1,6 @@
 <p>Are you sure you want to delete:</p>
-<blockquote><p><%= @item.title %></p></blockquote>
-<form action="/delete/<%= @item.id %>" method="POST">
+<blockquote><p><%= @tareadel["title"] %></p></blockquote>
+<form action="/delete/<%= params[:id] %>" method="POST">
   <button type="submit" class="btn btn-primary" name="ok">OK</button>
   <button type="submit" class="btn" name="cancel">Cancel</button>
 </form>
